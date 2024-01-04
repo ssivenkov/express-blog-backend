@@ -9,13 +9,11 @@ import { checkAuth, handleValidationErrors } from './utils/index.js';
 import { registerValidation, loginValidation } from "./validations/auth.js";
 import { postCreateValidation } from "./validations/post.js";
 
-const dataBaseName = process.env.DATABASE_NAME;
-const dataBaseCluster = process.env.DATABASE_CLUSTER;
-const dataBaseAdminPassword = process.env.DATABASE_ADMIN_PASSWORD;
+const mongodbUri = process.env.MONGODB_URI;
 const serverPort = process.env.SERVER_PORT;
 
 mongoose
-  .connect(`mongodb+srv://admin:${dataBaseAdminPassword}@cluster${dataBaseCluster}.mongodb.net/${dataBaseName}?retryWrites=true&w=majority`)
+  .connect(mongodbUri)
   .then(() => console.log('DB connected'))
   .catch((error) => console.log('Error DB connection:', error));
 
